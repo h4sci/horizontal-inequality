@@ -50,7 +50,7 @@ server <- function(input, output, session) {
         
         leaflet(world_ext) %>% 
             setView(lat = initial_lat, lng = initial_lng, zoom = initial_zoom) %>% 
-            addTiles() %>% 
+            addProviderTiles(providers$Esri.WorldStreetMap) %>% 
             addPolygons(fillColor = ~pal(value),
                         weight = 2,
                         opacity = 1,

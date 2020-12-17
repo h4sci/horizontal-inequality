@@ -13,11 +13,11 @@ server <- function(input, output, session) {
       filter(outcome_var == input$outcome_var,
              grouping_var == input$grouping_var)
     
-    bins <- as.vector(quantile(world_ext$ggini, na.rm = T))
+    bins <- as.vector(quantile(world_ext$gini_value, na.rm = T))
     pal <- colorBin("viridis", domain = world_ext$ggini, bins = bins)
     
     labels <- sprintf("<strong>%s</strong><br/>%g",
-                      world_ext$name_long, round(world_ext$ggini, digits = 2)) %>%
+                      world_ext$name_long, round(world_ext$gini_value, digits = 2)) %>%
       lapply(htmltools::HTML)
     
     

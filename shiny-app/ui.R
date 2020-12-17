@@ -11,6 +11,8 @@ ui <- bootstrapPage(
                 selectInput("outcome_var", "Outcome variable", unique(data$outcome_var)
                 ),
                 selectInput("grouping_var", "Grouping", unique(data$grouping_var)
+                ),
+                selectInput("measure", "Grouping", unique(data$measure)
                 )
   )
 )

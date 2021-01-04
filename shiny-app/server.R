@@ -9,9 +9,10 @@ server <- function(input, output, session) {
   
   output$map <- renderLeaflet({
     world_ext <- world %>% 
-      right_join(data, by = c("iso_a3" = "country")) %>% 
+      right_join(data, by = c("iso_a3" = "ISO")) %>% 
       filter(outcome_var == input$outcome_var,
-             grouping_var == input$grouping_var)
+             grouping_var == input$grouping_var, 
+             measure = input$measure)
     
     bins <- as.vector(quantile(world_ext$gini_value, na.rm = T))
     pal <- colorBin("viridis", domain = world_ext$ggini, bins = bins)

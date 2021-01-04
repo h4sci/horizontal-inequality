@@ -12,7 +12,7 @@ ui <- bootstrapPage(
                 ),
                 selectInput("grouping_var", "Grouping", unique(data$grouping_var)
                 ),
-                selectInput("measure", "Grouping", unique(data$measure)
+                selectInput("measure", "Weighting", unique(data$measure)
                 )
   )
 )

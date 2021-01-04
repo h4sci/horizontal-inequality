@@ -12,10 +12,10 @@ server <- function(input, output, session) {
       right_join(data, by = c("iso_a3" = "ISO")) %>% 
       filter(outcome_var == input$outcome_var,
              grouping_var == input$grouping_var, 
-             measure = input$measure)
+             measure == input$measure)
     
     bins <- as.vector(quantile(world_ext$gini_value, na.rm = T))
-    pal <- colorBin("viridis", domain = world_ext$ggini, bins = bins)
+    pal <- colorBin("viridis", domain = world_ext$gini_value, bins = bins)
     
     labels <- sprintf("<strong>%s</strong><br/>%g",
                       world_ext$name_long, round(world_ext$gini_value, digits = 2)) %>%
@@ -25,7 +25,7 @@ server <- function(input, output, session) {
     leaflet(world_ext) %>% 
       setView(lat = initial_lat, lng = initial_lng, zoom = initial_zoom) %>% 
       addTiles() %>% 
-      addPolygons(fillColor = ~pal(ggini),
+      addPolygons(fillColor = ~pal(gini_value),
                   weight = 2,
                   opacity = 1,
                   color = "white",
@@ -42,10 +42,8 @@ server <- function(input, output, session) {
                     style = list("font-weight" = "normal", padding = "3px 8px"),
                     textsize = "15px",
                     direction = "auto")) %>% 
-      addLegend(pal = pal, values = ~ggini, opacity = 0.7,
+      addLegend(pal = pal, values = ~gini_value, opacity = 0.7,
                 position = "bottomright",
                 title = "Quantiles of Gini-Coefficient")
   })
 }
-
-runApp("shiny-app")

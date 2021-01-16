@@ -11,7 +11,11 @@ library(sf)
 world <- ne_countries(scale = "medium", returnclass = "sf") %>% 
   select(name_long, brk_name, iso_a3)
 
+# define coordinate reference system
+st_crs(world) = 4326
+
 # read inequality data
+# Note: I had to set the precise path of the .csv file despite working in the project 
 master_data <- read_csv("raw-data/master_data.csv")
 
 # make long format 

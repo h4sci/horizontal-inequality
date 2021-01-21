@@ -15,13 +15,13 @@ world <- ne_countries(scale = "medium", returnclass = "sf") %>%
 st_crs(world) = 4326
 
 # read inequality data
-# Note: I had to set the precise path of the .csv file despite working in the project 
-master_data <- read_csv("raw-data/master_data.csv")
+
+master_data <- read_csv("shiny-app/master_data_ISO_phase.csv")
 
 # make long format 
 data <- master_data %>% 
-  select(country, year, "grouping_var" = category, measure, gini_sch, gini_chm, gini_chm, gini_wlth) %>% 
+  select(country, year, ISO, phase, "grouping_var" = category, measure, gini_sch, gini_chm, gini_st, gini_wlth) %>% 
   pivot_longer(cols = starts_with("gini_"), names_to = "outcome_var", values_to = "gini_value") %>% 
-  filter(year>=2013)
+  filter(year >= 2013)
  
 

@@ -15,6 +15,7 @@ ui <- bootstrapPage(
                 selectInput("measure", "Measure", unique(data$measure)
                 ),
                 sliderInput("year", "Year", min = min(data$year), max = max(data$year), value = 2013, step = 1),
+
   )
 )
 

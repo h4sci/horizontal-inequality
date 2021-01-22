@@ -17,7 +17,7 @@ server <- function(input, output, session) {
              year == input$year)
     
     bins <- round(as.vector(quantile(world_ext$gini_value, na.rm = T)), digits = 2)
-    pal <- colorBin("Blues", domain = world_ext$ggini, bins = bins)
+    pal <- colorBin("Blues", domain = world_ext$gini_value, bins = bins)
     
     labels <- sprintf("<strong>%s</strong><br/>%g",
                       world_ext$name_long, round(world_ext$gini_value, digits = 2)) %>%

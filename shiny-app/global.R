@@ -12,16 +12,27 @@ world <- ne_countries(scale = "medium", returnclass = "sf") %>%
   select(name_long, brk_name, iso_a3)
 
 # define coordinate reference system
-st_crs(world) = 4326
+ st_crs(world) = 4326
 
 # read inequality data
 
-master_data <- read_csv("shiny-app/master_data_ISO_phase.csv")
+master_data <- read_csv("master_data_ISO_phase.csv")
 
 # make long format 
 data <- master_data %>% 
   select(country, year, ISO, phase, "grouping_var" = category, measure, gini_sch, gini_chm, gini_st, gini_wlth) %>% 
   pivot_longer(cols = starts_with("gini_"), names_to = "outcome_var", values_to = "gini_value") %>% 
-  filter(year >= 2013)
+  filter(year >= 2013) %>% 
+  mutate(outcome_var = fct_recode(outcome_var,
+                                  "Schooling" = "gini_sch",
+                                  "Child mortality" = "gini_chm",
+                                  "Stunting" = "gini_st",
+                                  "Wealth" = "gini_wlth"),
+         grouping_var = fct_recode(grouping_var,
+                                   "Urban/Rural" = "region",
+                                   "Gender" = "gender",
+                                   "Religion" = "religion",
+                                   "Ethnicity" = "ethnicity")
+         )
  
 

@@ -5,7 +5,7 @@ server <- function(input, output, session) {
   # initial zoom set to SSA
   initial_lat = 0
   initial_lng = 20
-  initial_zoom = 3.5
+  initial_zoom = 2
   
   output$map <- renderLeaflet({
     world_ext <- world %>% 
@@ -47,7 +47,7 @@ server <- function(input, output, session) {
                     direction = "auto")) %>% 
       addLegend(pal = pal, values = ~gini_value, opacity = 0.7,
 
-                position = "topleft",
+                position = "bottomright",
                 title = "Quantiles of Gini-Coefficient")
   })
 }

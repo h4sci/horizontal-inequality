@@ -16,7 +16,7 @@ world <- ne_countries(scale = "medium", returnclass = "sf") %>%
 
 # read inequality data
 
-master_data <- read_csv("master_data_ISO_phase.csv")
+master_data <- read_csv("shiny-app/master_data_ISO_phase.csv")
 
 # make long format 
 data <- master_data %>% 

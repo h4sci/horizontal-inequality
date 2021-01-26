@@ -14,7 +14,8 @@ server <- function(input, output, session) {
       filter(outcome_var == input$outcome_var,
              grouping_var == input$grouping_var, 
              measure == input$measure,
-             year == input$year)
+             year == input$year) %>% 
+      mutate(gini_value = ifelse(!is.na(gini_value), gini_value, lag))
     
     bins <- round(as.vector(quantile(world_ext$gini_value, na.rm = T)), digits = 2)
     pal <- colorBin("Blues", domain = world_ext$gini_value, bins = bins)

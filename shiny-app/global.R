@@ -2,6 +2,7 @@
 
 library(tidyverse)
 library(shiny)
+library(shinyWidgets)
 library(leaflet)
 library(rnaturalearth) #for world map
 library(sf)
@@ -31,6 +32,6 @@ data <- master_data %>%
                                    "Gender" = "gender",
                                    "Religion" = "religion",
                                    "Ethnicity" = "ethnicity")
-         )
- 
-
+         ) %>% 
+  group_by(country, grouping_var, measure, outcome_var) %>% 
+  mutate(lag = lag(gini_value))

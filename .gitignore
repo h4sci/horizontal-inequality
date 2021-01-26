@@ -28,4 +28,8 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 horizontal-inequality-dario.Rproj
+<<<<<<< HEAD
+=======
+#MacOS specific file. 
+>>>>>>> upstream/main
 .DS_Store

@@ -14,14 +14,18 @@ server <- function(input, output, session) {
       filter(outcome_var == input$outcome_var,
              grouping_var == input$grouping_var, 
              measure == input$measure,
-             year == input$year) %>% 
-      mutate(gini_value = ifelse(!is.na(gini_value), gini_value, lag))
+             year <= input$year) %>% 
+      arrange(country, year) %>% 
+      group_by(country) %>% 
+      slice(n())
     
-    bins <- round(as.vector(quantile(world_ext$gini_value, na.rm = T)), digits = 2)
-    pal <- colorBin("Blues", domain = world_ext$gini_value, bins = bins)
+    #bins <- round(as.vector(quantile(world_ext$gini_value, na.rm = T)), digits = 2)
+    pal <- colorQuantile("viridis", n=10, domain = world_ext$gini_value)
     
     labels <- sprintf("<strong>%s</strong><br/>%g",
-                      world_ext$name_long, round(world_ext$gini_value, digits = 2)) %>%
+                      world_ext$name_long, 
+                      round(world_ext$gini_value, digits = 2),
+                      world_ext$year) %>%
       lapply(htmltools::HTML)
     
     

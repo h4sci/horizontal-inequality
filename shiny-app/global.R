@@ -1,5 +1,4 @@
 # global script for functions and data manipulation
-
 library(tidyverse)
 library(shiny)
 library(shinyWidgets)
@@ -32,6 +31,4 @@ data <- master_data %>%
                                    "Gender" = "gender",
                                    "Religion" = "religion",
                                    "Ethnicity" = "ethnicity")
-         ) %>% 
-  group_by(country, grouping_var, measure, outcome_var) %>% 
-  mutate(lag = lag(gini_value))
+         ) 

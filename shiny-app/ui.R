@@ -10,13 +10,13 @@ ui <- bootstrapPage(
   absolutePanel(top = "30%", left = "2%",
                 selectInput("outcome_var", "Outcome variable", unique(data$outcome_var)
                 ),
-                selectInput("grouping_var", "Grouping", unique(data$grouping_var)
+                selectInput("grouping_var", "Grouping", unique(data$grouping_var), selected = "Gender"
                 ),
-                selectInput("measure", "Measure", unique(data$measure)
+                selectInput("measure", "Pop. weighting", unique(data$measure), selected = "Weighted"
                 ),
                 chooseSliderSkin("Flat"),
                 setSliderColor("grey", 1),
-                sliderInput("year", "Year", min = min(data$year), max = max(data$year), value = 2013, step = 1, sep = ""),
+                sliderInput("year", "Year", min = min(data$year), max = max(data$year), value = max(data$year), step = 1, sep = ""),
 
   )
 )
